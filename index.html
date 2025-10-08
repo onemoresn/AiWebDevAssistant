@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Web Dev Assistant</title>
+  <meta name="description" content="AI-powered web development assistant that can generate sites, snippets, and explanations." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="SMAiAssistant.png" alt="AI Web Dev Assistant logo" class="brand-icon" />
+      <h1>AI Web Dev Assistant</h1>
+    </div>
+    <div class="header-actions">
+      <select id="modeSelect" aria-label="Assistant mode">
+        <option value="generate">Generate</option>
+        <option value="explain">Explain</option>
+        <option value="debug">Debug</option>
+        <option value="optimize">Optimize</option>
+        <option value="powerapps">Power Fx</option>
+        <option value="site">Full Site</option>
+      </select>
+      <select id="themeSelect" aria-label="Theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="matrix">Matrix</option>
+      </select>
+      <select id="modelSelect" aria-label="Model">
+        <option value="local-mock">Local Mock</option>
+      </select>
+      <label class="toggle"><input type="checkbox" id="memoryToggle" /> Memory</label>
+      <label class="toggle"><input type="checkbox" id="speakToggle" /> Speak</label>
+      <button id="clearBtn" type="button" class="secondary">Clear</button>
+      <button id="exportBtn" type="button" class="secondary">Export</button>
+      <button id="importBtn" type="button" class="secondary">Import</button>
+      <input id="importFile" type="file" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="chat-panel">
+      <div id="chatLog" class="chat-log" aria-live="polite"></div>
+      <form id="chatForm" class="chat-form" autocomplete="off">
+        <div class="input-row">
+          <textarea id="userInput" placeholder="Ask for a component, a full site, debugging help, etc... Shift+Enter = newline" rows="2"></textarea>
+          <div class="form-buttons">
+            <button type="button" id="micBtn" class="icon-btn" title="Voice input">🎤</button>
+            <button type="submit" id="sendBtn">Send</button>
+          </div>
+        </div>
+        <div class="snippet-toolbar" id="snippetButtons"></div>
+        <div class="image-tools">
+          <input type="file" id="imageInput" accept="image/*" multiple hidden />
+          <button type="button" id="addImagesBtn" class="secondary small">+ Images</button>
+          <button type="button" id="clearImagesBtn" class="secondary small">Clear Images</button>
+        </div>
+        <div id="imageGallery" class="image-gallery"></div>
+      </form>
+    </section>
+
+    <section class="preview-panel">
+      <div class="preview-header">
+        <h2>Live Preview</h2>
+        <div class="preview-actions">
+          <label class="toggle"><input type="checkbox" id="beginnerMode" checked /> Beginner Mode</label>
+          <label class="toggle"><input type="checkbox" id="tailwindPref" /> Tailwind</label>
+          <button type="button" id="downloadSiteBtn" class="secondary" disabled>Download ZIP</button>
+        </div>
+      </div>
+      <div class="generated-files" id="generatedFiles"></div>
+      <iframe id="sitePreview" title="Site Preview" sandbox="allow-scripts allow-same-origin" class="site-preview"></iframe>
+    </section>
+  </main>
+
+  <template id="messageTemplate">
+    <div class="message">
+      <div class="meta"><span class="role"></span> <span class="timestamp"></span> <button class="copy-btn" type="button">Copy</button></div>
+      <div class="content"></div>
+    </div>
+  </template>
+
+  <script src="js/assistant.js"></script>
+</body>
+</html>
